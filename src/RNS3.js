@@ -30,7 +30,7 @@ const setBodyAsParsedXML = (response) =>
   })
 
 export class RNS3 {
-  static put(file, options) {
+  static put(presignedUrl, file, options) {
     options = {
       ...options,
       key: (options.keyPrefix || '') + file.name,
@@ -38,8 +38,8 @@ export class RNS3 {
       contentType: file.type
     }
 
-    const url = `https://${options.bucket}.${options.awsUrl || AWS_DEFAULT_S3_HOST}`
-    const method = "POST"
+    const url = presignedUrl
+    const method = "PUT"
     const policy = S3Policy.generate(options)
 
     return Request.create(url, method, policy)
