@@ -40,9 +40,8 @@ export class RNS3 {
 
     const url = presignedUrl
     const method = "PUT"
-    const policy = S3Policy.generate(options)
 
-    return Request.create(url, method, policy)
+    return Request.create(url, method, options)
       .set("file", file)
       .send()
       .then(setBodyAsParsedXML)
